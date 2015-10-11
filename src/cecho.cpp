@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 // cecho - colored echo for Windows command processo
-// Copyright (C) 2014 LoRd_MuldeR <mulder2@gmx.de>. Some rights reserved.
+// Copyright (C) 2014-2015 LoRd_MuldeR <mulder2@gmx.de>. Some rights reserved.
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -298,7 +298,7 @@ static void print_formated(const WORD color, const char *text, ...)
 static void print_help(void)
 {
 	print_colored(g_defaultTextAttribute, "cecho - colored echo for Windows command processor [" __DATE__ "]");
-	print_colored(g_defaultTextAttribute, "Copyright (C) 2014 LoRd_MuldeR <mulder2@gmx.de>. Some rights reserved.\n");
+	print_colored(g_defaultTextAttribute, "Copyright (C) 2014-2015 LoRd_MuldeR <mulder2@gmx.de>. Some rights reserved.\n");
 	print_colored(g_defaultTextAttribute, "Usage:");
 	print_colored(g_defaultTextAttribute, "   cecho.exe <forground_color> [<background_color>] <echo_text>\n");
 	print_colored(g_defaultTextAttribute, "Color names:");
@@ -404,7 +404,11 @@ static LONG WINAPI unhandled_exception_handler(struct _EXCEPTION_POINTERS*)
 	return LONG_MAX;
 }
 
-int wmainCRTStartup(void)
+// -----------------------------------------------------------------------------
+// CRT Startup Routine
+// -----------------------------------------------------------------------------
+
+extern "C" int myCRTStartup(void)
 {
 	SetErrorMode(SEM_FAILCRITICALERRORS | SEM_NOOPENFILEERRORBOX);
 	SetUnhandledExceptionFilter(unhandled_exception_handler);
@@ -426,5 +430,6 @@ int wmainCRTStartup(void)
 	const int exit_code = wmain(numArgs, szArglist);
 	LocalFree(szArglist);
 
+	ExitProcess(*reinterpret_cast<const UINT*>(&exit_code));
 	return exit_code;
 }

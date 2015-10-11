@@ -1,8 +1,8 @@
 About
 -----
 
-**cecho - colored echo for Windows command processor [Apr  6 2014]**  
-**Copyright (C) 2014 LoRd_MuldeR <mulder2@gmx.de>. Some rights reserved.**
+**cecho - colored echo for Windows command processor [Oct 11 2015]**  
+**Copyright (C) 2014-2015 LoRd_MuldeR <mulder2@gmx.de>. Some rights reserved.**  
 
 This program is free software; you can redistribute it and/or modify  
 it under the terms of the GNU General Public License as published by  
